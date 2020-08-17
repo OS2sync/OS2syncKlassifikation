@@ -1,0 +1,28 @@
+﻿{
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.RollingFile", "Serilog.Sinks.Console" ],
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft.EntityFrameworkCore": "Error"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "RollingFile",
+        "Args": {
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u} {SourceContext} {Message:lj}{NewLine}{Exception}",
+          "pathFormat": "C:/Logs/StsKlassifikation_{Date}.log",
+          "shared": "true"
+        }
+      },
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u} {SourceContext} {Message:lj}{NewLine}{Exception}"
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ]
+  }
+}
